@@ -760,7 +760,7 @@ module.exports = function (webpackEnv) {
         }),
       isEnvProduction &&
         new ZipPlugin({
-          filename: "offline",
+          filename: process.env.ZIP_NAME,
         }),
     ].filter(Boolean),
     // Turn off performance processing because we utilize
