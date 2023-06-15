@@ -25,10 +25,11 @@ const ForkTsCheckerWebpackPlugin =
     ? require("react-dev-utils/ForkTsCheckerWarningWebpackPlugin")
     : require("react-dev-utils/ForkTsCheckerWebpackPlugin");
 const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
+const ZipPlugin = require("./plugins/ZipPlugin.js");
 
 const createEnvironmentHash = require("./webpack/persistentCache/createEnvironmentHash");
 
-const MFConfig = require("../mf.config");
+const getMFConfig = require("../mf.config");
 const { formatMFConfig } = require("./webpack/util");
 const { ModuleFederationPlugin } = require("webpack").container;
 
@@ -204,7 +205,7 @@ module.exports = function (webpackEnv) {
       : isEnvDevelopment && "cheap-module-source-map",
     // These are the "entry points" to our application.
     // This means they will be the "root" imports that are included in JS bundle.
-    entry: paths.appIndexJs,
+    entry: isEnvProduction ? paths.appIndexJsProd : paths.appIndexJs,
     output: {
       // The build folder.
       path: paths.appBuild,
@@ -570,7 +571,9 @@ module.exports = function (webpackEnv) {
       ].filter(Boolean),
     },
     plugins: [
-      new ModuleFederationPlugin(formatMFConfig(MFConfig)),
+      new ModuleFederationPlugin(
+        formatMFConfig(getMFConfig({ isEnvProduction }))
+      ),
       // Generates an `index.html` file with the <script> injected.
       new HtmlWebpackPlugin(
         Object.assign(
@@ -754,6 +757,10 @@ module.exports = function (webpackEnv) {
               }),
             },
           },
+        }),
+      isEnvProduction &&
+        new ZipPlugin({
+          filename: "offline",
         }),
     ].filter(Boolean),
     // Turn off performance processing because we utilize
