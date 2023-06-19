@@ -9,7 +9,7 @@ const editField: EditFieldValue = {
   list: [
     {
       key: "titleContent",
-      name: "标题内容",
+      name: "Remote标题内容",
       type: "title",
       children: [
         {
@@ -17,16 +17,11 @@ const editField: EditFieldValue = {
           name: "标题",
           type: "Input",
         },
-        {
-          key: "subTitle",
-          name: "副标题",
-          type: "Input",
-        },
       ],
     },
     {
       key: "titleFlex",
-      name: "标题布局",
+      name: "Remote标题布局",
       type: "title",
       children: [
         {
@@ -39,7 +34,7 @@ const editField: EditFieldValue = {
     },
     {
       key: "titleStyle",
-      name: "标题样式",
+      name: "Remote标题样式",
       type: "title",
       children: [
         {
@@ -61,20 +56,8 @@ const editField: EditFieldValue = {
           component: (props: any) => <Slider min={10} max={50} {...props} />,
         },
         {
-          key: "subTitleFontSize",
-          name: "副标题字体",
-          type: "custom",
-          component: (props: any) => <Slider min={10} max={50} {...props} />,
-        },
-        {
           key: "titleColor",
           name: "标题颜色",
-          type: "custom",
-          component: (props: any) => <ColorPicker {...props} />,
-        },
-        {
-          key: "subTitleColor",
-          name: "副标题颜色",
           type: "custom",
           component: (props: any) => <ColorPicker {...props} />,
         },

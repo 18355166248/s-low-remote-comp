@@ -1,3 +1,3 @@
-import LowTitle from "../components/LowTitle";
+import RemoteTitle from "../components/LowTitle";
 
-export default LowTitle;
+export default RemoteTitle;

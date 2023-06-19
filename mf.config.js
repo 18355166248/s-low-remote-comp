@@ -1,8 +1,8 @@
-const { dependencies } = require("./package.json");
+const { dependencies, name } = require("./package.json");
 
 function getMFConfig() {
   return {
-    name: "lowTitle",
+    name,
     exposes: {
       fields: "./src/schema/fields.ts",
       edit: "./src/schema/edit.tsx",
